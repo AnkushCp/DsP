@@ -1,0 +1,809 @@
+1)
+1.1  Write a R program to create two 2x3 matrix and add, subtract, multiply and divide the matrixes.
+
+m1 = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+print("Matrix-1:")
+print(m1)
+m2 = matrix(c(0, 1, 2, 3, 0, 2), nrow = 2)
+print("Matrix-2:")
+print(m2)
+result = m1 + m2
+print("Result of addition")
+print(result)
+
+result = m1 - m2
+print("Result of subtraction")
+print(result)
+
+result = m1 * m2
+print("Result of multiplication")
+print(result)
+
+result = m1 / m2
+print("Result of division:")
+print(result)
+
+
+1.2 Write a R program to create an array of two 3x3 matrices each with 3 rows and 3 columns from two given two vectors.
+
+vector1 <- c(1, 2, 3, 4, 5, 6, 7, 8, 9)
+vector2 <- c(9, 8, 7, 6, 5, 4, 3, 2, 1)
+
+# Create matrices from the vectors
+matrix1 <- matrix(vector1, nrow = 3, byrow = TRUE)
+matrix2 <- matrix(vector2, nrow = 3, byrow = TRUE)
+
+# Combine matrices into a 3D array
+result_array <- array(c(matrix1, matrix2), dim = c(3, 3, 2))
+
+# Print the result
+print(result_array)
+
+1.3 Write a R program to combine three arrays so that the first row of the first array is followed by the first row of the second array and then first row of the third array.
+
+num1 = rbind(rep("A",3), rep("B",3), rep("C",3))
+print("num1")
+print(num1)
+num2 = rbind(rep("P",3), rep("Q",3), rep("R",3))
+print("num2")
+print(num2)
+num3 = rbind(rep("X",3), rep("Y",3), rep("Z",3))
+print("num3")
+print(num3)
+a = matrix(t(cbind(num1,num2,num3)),ncol=3, byrow=T)
+print("Combine three arrays, taking one row from each one by one:")
+print(a)
+
+
+OR 
+ Implement Decision Tree Classification techniques using any data analytics tool.
+
+# Install and load required packages
+install.packages("rpart")
+library(rpart)
+
+# Load the Iris dataset (or you can replace it with your own dataset)
+data(iris)
+
+# Split the dataset into training and testing sets
+set.seed(123)
+sample_index <- sample(1:nrow(iris), nrow(iris)*0.7)  # 70% for training
+train_data <- iris[sample_index, ]
+test_data <- iris[-sample_index, ]
+
+# Create a decision tree model
+tree_model <- rpart(Species ~ ., data = train_data, method = "class")
+
+# Visualize the decision tree
+plot(tree_model)
+text(tree_model, pretty = 0)
+
+# Make predictions on the test set
+predictions <- predict(tree_model, test_data, type = "class")
+
+# Evaluate the accuracy
+accuracy <- sum(predictions == test_data$Species) / nrow(test_data)
+cat("Accuracy:", accuracy, "\n")
+
+
+
+OR
+install.packages("rpart")
+install.packages("rpart.plot")
+library(rpart)
+library(rpart.plot)
+
+# Load the Iris dataset
+data(iris)
+
+# Build a decision tree model
+tree_model <- rpart(Species ~ ., data = iris, method = "class")
+
+# Plot the decision tree with improved visualization
+rpart.plot(tree_model, box.palette = "auto", shadow.col = "gray", nn = TRUE)
+
+2.1 Write a R program to convert a given matrix to a 1 dimensional array
+
+m=matrix(1:12,3,4)
+print("Original matrix:")
+print(m)
+a = as.vector(m)
+print("1 dimensional array:")
+print(a)
+
+2.2  Write a R program to combine three arrays so that the first row of the first array is followed by the first row of the second array and then first row of the third array.
+
+num1 = rbind(rep("A",3), rep("B",3), rep("C",3))
+print("num1")
+print(num1)
+num2 = rbind(rep("P",3), rep("Q",3), rep("R",3))
+print("num2")
+print(num2)
+num3 = rbind(rep("X",3), rep("Y",3), rep("Z",3))
+print("num3")
+print(num3)
+a = matrix(t(cbind(num1,num2,num3)),ncol=3, byrow=T)
+print("Combine three arrays, taking one row from each one by one:")
+print(a)
+
+
+
+
+ 2.3) Write a R program to create a data frame from four given vectors.
+
+name = c('Anastasia', 'Dima', 'Katherine', 'James', 'Emily', 'Michael', 'Matthew', 'Laura', 'Kevin', 'Jonas')
+score = c(12.5, 9, 16.5, 12, 9, 20, 14.5, 13.5, 8, 19)
+attempts = c(1, 3, 2, 3, 2, 3, 1, 1, 2, 1)
+qualify = c('yes', 'no', 'yes', 'no', 'no', 'yes', 'yes', 'no', 'no', 'yes')
+print("Original data frame:")
+print(name)
+print(score)
+print(attempts)
+print(qualify)
+df = data.frame(name, score, attempts, qualify)  
+print(df)
+
+
+2)OR
+ Implement K Means Clustering techniques.
+# Load the Iris dataset (or you can replace it with your own dataset)
+data(iris)
+
+# Select features for clustering (in this example, using Petal Length and Petal Width)
+features <- iris[, c("Petal.Length", "Petal.Width")]
+
+# Set the number of clusters (K)
+k <- 3
+
+# Create K-Means clustering model
+kmeans_model <- kmeans(features, centers = k, nstart = 20)  # nstart for multiple initializations
+
+# Display the cluster centers
+cat("Cluster Centers:\n")
+print(kmeans_model$centers)
+
+# Predict the cluster assignments for each data point
+cluster_assignments <- kmeans_model$cluster
+
+# Visualize the clustering result (using Petal Length and Petal Width)
+plot(features, col = cluster_assignments, pch = 19, main = "K-Means Clustering")
+
+# Add cluster centers to the plot
+points(kmeans_model$centers, col = 1:k, pch = 8, cex = 2, lwd = 2)
+
+
+3.1)Write a R program to get the structure of a given data frame.
+
+exam_data = data.frame(
+  name = c('Anastasia', 'Dima', 'Katherine', 'James', 'Emily', 'Michael', 'Matthew', 'Laura', 'Kevin', 'Jonas'),
+  score = c(12.5, 9, 16.5, 12, 9, 20, 14.5, 13.5, 8, 19),
+  attempts = c(1, 3, 2, 3, 2, 3, 1, 1, 2, 1),
+  qualify = c('yes', 'no', 'yes', 'no', 'no', 'yes', 'yes', 'no', 'no', 'yes')
+  )
+print("Original dataframe:")
+print(exam_data)
+print("Structure of the said data frame:")
+print(str(exam_data))
+
+
+
+3.2)Write a R program to extract specific column from a data frame using column name.
+exam_data = data.frame(
+  name = c('Anastasia', 'Dima', 'Katherine', 'James', 'Emily', 'Michael', 'Matthew', 'Laura', 'Kevin', 'Jonas'),
+  score = c(12.5, 9, 16.5, 12, 9, 20, 14.5, 13.5, 8, 19),
+  attempts = c(1, 3, 2, 3, 2, 3, 1, 1, 2, 1),
+  qualify = c('yes', 'no', 'yes', 'no', 'no', 'yes', 'yes', 'no', 'no', 'yes')
+)
+print("Original dataframe:")
+print(exam_data)
+print("Extract Specific columns:")
+
+print(exam_data$name)  #foor one column to be extracted
+
+result <- data.frame(exam_data$name,exam_data$score)
+print(result)
+
+
+3.3)Write a R program to add new row(s) to an existing data frame.
+exam_data = data.frame(
+  name = c('Anastasia', 'Dima', 'Katherine', 'James', 'Emily', 'Michael', 'Matthew', 'Laura', 'Kevin', 'Jonas'),
+  score = c(12.5, 9, 16.5, 12, 9, 20, 14.5, 13.5, 8, 19),
+  attempts = c(1, 3, 2, 3, 2, 3, 1, 1, 2, 1),
+  qualify = c('yes', 'no', 'yes', 'no', 'no', 'yes', 'yes', 'no', 'no', 'yes')
+)
+print("Original dataframe:")
+print(exam_data)
+new_exam_data = data.frame(
+  name = c('Robert', 'Sophia'),
+  score = c(10.5, 9),
+  attempts = c(1, 3),
+  qualify = c('yes', 'no')
+)
+exam_data =  rbind(exam_data, new_exam_data)
+print("After adding new row(s) to an existing data frame:")
+print(exam_data)
+
+ 3)OR
+ Implement Apriori Association Rule Mining techniques.
+# Install and load required packages
+install.packages("arules")
+library(arules)
+
+# Create a sample transactions dataset
+transactions <- read.transactions(header = FALSE, data = matrix(c(
+  "Milk", "Bread", "Diaper",
+  "Milk", "Beer", "Eggs",
+  "Bread", "Beer", "Diaper", "Milk",
+  "Bread", "Beer", "Diaper", "Eggs"
+), ncol = 3, byrow = TRUE))
+
+# Display the transactions
+inspect(transactions)
+
+# Use Apriori algorithm to mine association rules
+rules <- apriori(transactions, parameter = list(supp = 0.2, conf = 0.8))
+
+# Display the mined rules
+inspect(rules)
+
+# Install and load required packages
+install.packages("arules")
+library(arules)
+
+# Create a sample transactions dataset
+transactions <- read.transactions(header = FALSE, data = matrix(c(
+  "Milk", "Bread", "Diaper",
+  "Milk", "Beer", "Eggs",
+  "Bread", "Beer", "Diaper", "Milk",
+  "Bread", "Beer", "Diaper", "Eggs"
+), ncol = 3, byrow = TRUE))
+
+# Display the transactions
+summary(transactions)
+
+# Use Apriori algorithm to mine association rules
+rules <- apriori(transactions, parameter = list(supp = 0.2, conf = 0.8))
+
+# Display the mined rules
+summary(rules)
+
+
+4.1) Write a R program to drop column(s) by name from a given data frame.
+exam_data = data.frame(
+  name = c('Anastasia', 'Dima', 'Katherine', 'James', 'Emily', 'Michael', 'Matthew', 'Laura', 'Kevin', 'Jonas'),
+  score = c(12.5, 9, 16.5, 12, 9, 20, 14.5, 13.5, 8, 19),
+  attempts = c(1, 3, 2, 3, 2, 3, 1, 1, 2, 1),
+  qualify = c('yes', 'no', 'yes', 'no', 'no', 'yes', 'yes', 'no', 'no', 'yes')
+)
+print("Original dataframe:")
+print(exam_data)
+exam_data = subset(exam_data, select = -c(name, qualify))
+print(exam_data)
+
+4.2)Write a R program to sort a given data frame by multiple column(s).
+exam_data = data.frame(
+  name = c('Anastasia', 'Dima', 'Katherine', 'James', 'Emily', 'Michael', 'Matthew', 'Laura', 'Kevin', 'Jonas'),
+  score = c(12.5, 9, 16.5, 12, 9, 20, 14.5, 13.5, 8, 19),
+  attempts = c(1, 3, 2, 3, 2, 3, 1, 1, 2, 1),
+  qualify = c('yes', 'no', 'yes', 'no', 'no', 'yes', 'yes', 'no', 'no', 'yes')
+)
+print("Original dataframe:")
+print(exam_data)
+print("dataframe after sorting 'name' and 'score' columns:")
+exam_data = exam_data[with(exam_data, order(name, score)), ]
+print(exam_data)
+
+
+4.3) Write a R program to replace NA values with 3 in a given data frame.
+exam_data = data.frame(
+  name = c('Anastasia', 'Dima', 'Katherine', 'James', 'Emily', 'Michael', 'Matthew', 'Laura', 'Kevin', 'Jonas'),
+  score = c(12.5, 9, 16.5, 12, 9, 20, 14.5, 13.5, 8, 19),
+  attempts = c(1, NA, 2, NA, 2, NA, 1, NA, 2, 1),
+  qualify = c('yes', 'no', 'yes', 'no', 'no', 'yes', 'yes', 'no', 'no', 'yes')
+)
+print("Original dataframe:")
+print(exam_data)
+exam_data[is.na(exam_data)] = 3
+print("After removing NA with 3, the said dataframe becomes:")
+print(exam_data)
+
+4) OR
+Implement Data visualization using Histogram on Iris Data set
+
+# Load the Iris dataset
+data(iris)
+print(iris)
+
+# Create a histogram for Sepal Length
+hist(iris$Sepal.Length, 
+     main = "Histogram of Sepal Length",
+     xlab = "Sepal Length",
+     ylab = "Frequency",
+     col = "pink",
+     border = "black")
+
+
+5.1) Write a R program to create a vector of a specified type and length. Create vector of 
+#numeric, complex, logical and character types of length 6.
+
+# Create a vector of numeric type
+numeric_vector <- c(1.2, 3.5, 7.8, 4.1, 9.0, 2.3)
+
+# Create a vector of complex type
+complex_vector <- c(1 + 2i, 3 - 4i, 5 + 6i, 7 - 8i, 9 + 10i, 11 - 12i)
+
+# Create a vector of logical type
+logical_vector <- c(TRUE, FALSE, TRUE, FALSE, TRUE, FALSE)
+
+# Create a vector of character type
+character_vector <- c("apple", "banana", "orange", "grape", "kiwi", "mango")
+
+# Print the vectors
+cat("Numeric Vector:", numeric_vector, "\n")
+cat("Complex Vector:", complex_vector, "\n")
+cat("Logical Vector:", logical_vector, "\n")
+cat("Character Vector:", character_vector, "\n")
+
+
+5.2) Write a R program to add two vectors of integers type and length 3.
+x = c(10, 20, 30)
+y = c(20, 10, 40)
+print("Original Vectors:")
+print(x)
+print(y)
+print("After adding two Vectors:")
+z = x + y
+print(z)
+
+
+
+5.3) Write a R program to append value to a given empty vector.
+vector = c()
+values = c(0,1,2,3,4,5,6,7,8,9)
+for (i in 1:length(values))
+  vector[i] <- values[i]
+print(vector)
+
+
+5)OR
+Implement Data visualization using scatter graph on Iris Data set.
+# Load the Iris dataset
+# Load the Iris dataset
+data(iris)
+
+# Create a scatter plot for Sepal Length vs. Sepal Width
+plot(iris$Sepal.Length, iris$Sepal.Width, 
+     main = "Scatter Plot of Sepal Length vs. Sepal Width",
+     xlab = "Sepal Length", ylab = "Sepal Width",
+     col = iris$Species, pch = 16)
+
+# Add a legend
+legend("topright", legend = levels(iris$Species), col = 1:3, pch = 16, title = "Species")
+
+
+
+6.1) Write a R program to multiply two vectors of integers type and length 3.
+x = c(10, 20, 30)
+y = c(20, 10, 40)
+print("Original Vectors:")
+print(x)
+print(y)
+print("Product of two Vectors:")
+z = x * y
+print(z)
+
+6.2) Write a R program to find Sum, Mean and Product of a Vector.
+x = c(10, 20, 30)
+print("Sum:")
+print(sum(x))
+print("Mean:")
+print(mean(x))  
+print("Product:")
+print(prod(x))
+
+6.3) Write a R program to find Sum, Mean and Product of a Vector, ignore element like NA or NaN.
+x = c(10, NULL, 20, 30, NA)
+print("Sum:")
+#ignore NA and NaN values
+print(sum(x, na.rm=TRUE))
+print("Mean:")
+print(mean(x, na.rm=TRUE))  
+print("Product:")
+print(prod(x, na.rm=TRUE))
+
+
+6.4) Write a R program to find the minimum and the maximum of a Vector.
+x = c(10, 20, 30, 25, 9, 26)
+print("Original Vectors:")
+print(x)
+
+print("Maximum value of the above Vector:")
+print(max(x))
+
+print("Minimum value of the above Vector:")
+print(min(x))
+
+
+6)OR
+Implement KNN algorithm
+
+# Load the required package
+install.packages("class")
+library(class)
+
+# Load the Iris dataset
+data(iris)
+
+# Split the dataset into training and testing sets
+set.seed(123)
+sample_index <- sample(1:nrow(iris), nrow(iris) * 0.7)  # 70% for training
+train_data <- iris[sample_index, ]
+test_data <- iris[-sample_index, ]
+
+# Select predictor variables (features)
+predictors <- c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width")
+
+# Use k-NN algorithm for classification
+k <- 3  # Set the number of neighbors
+knn_predictions <- knn(train = train_data[, predictors], 
+                       test = test_data[, predictors], 
+                       cl = train_data$Species, 
+                       k = k)
+
+# Compare predictions with actual species in the test set
+confusion_matrix <- table(Actual = test_data$Species, Predicted = knn_predictions)
+cat("Confusion Matrix:\n", confusion_matrix, "\n")
+
+# Calculate accuracy
+accuracy <- sum(diag(confusion_matrix)) / sum(confusion_matrix)
+cat("Accuracy:", accuracy, "\n")
+
+7) Create employee csv file with details like name,sal,age,dept , input the file , read , and perform following operations. 
+
+ Name Salary Age Department
+1  Anay  27000  23         IT
+2 Parth  35000  27        SOC
+3 Rihan  45000  29         HR
+4 Omkar  18000  21        NOC
+
+path <- "C:/Users/WPT/Desktop/INFOO.csv"
+c<-read.csv(path)
+print(c)
+
+a) Get maximum salary
+max_salary <- max(c$Salary)
+print(max_salary)
+
+
+b) Get the details of the person with max salary
+
+max_salary_details <- c[c$Salary == max_salary, ]
+print( max_salary_details)
+
+c) Get all the people working in IT department
+
+it_department <- c[c$Department == "IT", ]
+print(it_department)
+
+d) Get the persons in IT department whose salary is greater than 600
+
+it_high_salary <- it_department[it_department$Salary > 600, ]
+print(it_high_salary)
+
+
+7) Implement Random Forest algorithm
+
+
+8.1)Write a R program to sort a Vector in ascending and descending order.
+x = c(10, 20, 30, 25, 9, 26)
+print("Original Vectors:")
+print(x)
+print("Sort in ascending order:")
+print(sort(x))
+print("Sort in descending order:")
+print(sort(x, decreasing=TRUE))
+
+8.2) Write a R program to count the specific value in a given vector.
+x = c(10, 20, 30, 20, 20, 25, 9, 26)
+print("Original Vectors:")
+print(x)
+print("Count specific value(20) in above vector:")
+print(sum(x==20))
+
+
+8.3)Write a R program to access the last value in a given vector.
+x = c(10, 20, 30, 20, 20, 25, 9, 26)
+print("Original Vectors:")
+print(x)
+print("Access the last value of the said vector:")
+print(tail(x, n=1))
+
+
+8.4)Write a R program to find Sum, Mean and Product of a Vector, ignore element like NA or NaN.
+x = c(10, NULL, 20, 30, NA)
+print("Sum:")
+#ignore NA and NaN values
+print(sum(x, na.rm=TRUE))
+print("Mean:")
+print(mean(x, na.rm=TRUE))  
+print("Product:")
+print(prod(x, na.rm=TRUE))
+
+
+
+8)OR
+Write a program for user defined function (minimum three function)
+
+# Function to calculate the square of a number
+square <- function(x) {
+  return(x^2)
+}
+
+# Function to calculate the factorial of a number
+even_odd <- function(n) {
+  if (n%%2==0) {
+    print("Even")
+  } else {
+    print("Odd")
+  }
+}
+
+
+
+
+# Function to check if a number is prime
+is_prime <- function(num) {
+  if (num < 2) {
+    return(FALSE)
+  }
+  for (i in 2:(num-1)) {
+    if (num %% i == 0) {
+      return(FALSE)
+    }
+  }
+  return(TRUE)
+}
+
+# Example usage of the user-defined functions
+# Calculate the square of 5
+result_square <- square(5)
+cat("Square of 5:", result_square, "\n")
+
+even_odd(5)
+
+# Check if 7 is a prime number
+result_prime <- is_prime(7)
+cat("Is 7 a prime number?", result_prime, "\n")
+
+
+
+9.1)Write a R program to create a list containing a vector, a matrix and a list and remove the second element.
+list_data <- list(c("Red","Green","Black"), matrix(c(1,3,5,7,9,11), nrow = 2),
+                  list("Python", "PHP", "Java"))
+print("List:")
+print(list_data)
+print("Remove the second element of the list:")
+list_data[2] = NULL
+print("New list:")
+print(list_data)
+
+
+9.2) Write a R program to create a list containing a vector, a matrix and a list and update the last element.
+
+list_data <- list(c("Red","Green","Black"), matrix(c(1,3,5,7,9,11), nrow = 2),
+                  list("Python"))
+print("List:")
+print(list_data)
+print("Update the second element of the list:")
+list_data[3] =  "R programming"
+print("New list:")
+print(list_data)
+
+
+9.3)Write a R program to merge two given lists into one list.
+n1 = list(1,2,3)
+c1 = list("Red", "Green", "Black")
+print("Original lists:")
+print(n1)
+print(c1)
+print("Merge the said lists:")
+mlist =  c(n1, c1)
+print("New merged list:")
+print(mlist)
+
+
+
+
+
+
+
+9)OR
+Write any three programs which shows looping structures
+# Program to print numbers from 1 to 5 using a while loop
+
+counter = 1
+
+while (counter <= 5) {
+  print(counter)
+  counter <- counter + 1
+}
+# Program to print even numbers from 2 to 10 using a for loop
+
+for (i in 2:10) {
+  if (i %% 2 == 0) {
+    print(i)
+  }
+}
+# Program to calculate the factorial of a number using a repeat loop
+
+calculate_factorial <- function(n) {
+  result <- 1
+  counter <- 1
+  
+  repeat {
+    result <- result * counter
+    counter <- counter + 1
+    
+    if (counter > n) {
+      break
+    }
+  }
+  
+  return(result)
+}
+print(calculate_factorial(5))
+# Example: Calculate factorial of 5
+factorial_of_5 <- calculate_factorial(5)
+print(paste("Factorial of 5 is:", factorial_of_5))
+
+
+
+
+
+
+10.1) Write a program which demonstrates use of switch case statement.
+
+# Program to demonstrate the use of switch case statement in R
+
+day <- "Monday"
+
+switch(day)
+       "Monday" = {
+         print("It's the start of the week.")
+       },
+       "Wednesday" = {
+         print("Halfway through the week.")
+       },
+       "Friday" = {
+         print("It's almost the weekend!")
+       },
+       {
+         print("It's not Monday, Wednesday, or Friday.")
+       }
+)
+
+
+10.2) Write a program which demonstrate use of go to statement.
+
+# Program demonstrating the use of loops instead of go to in R
+
+counter <- 1
+
+while (TRUE) {
+  print(paste("Inside the loop, counter =", counter))
+  
+  if (counter == 5) {
+    print("Breaking out of the loop.")
+    break
+  }
+  
+  counter <- counter + 1
+}
+
+
+#10) Implement Random Forest algorithm.
+
+11) Write any three programs which shows looping structures.
+
+#11) Implement Random Forest algorithm
+It is an ensemble learning method, meaning it builds multiple individual models and combines them to obtain a more accurate and robust prediction. 
+High Predictive Accuracy:
+Robustness to Overfitting:
+
+data(iris)
+
+# Split the dataset into training and testing sets
+set.seed(123)
+indices <- sample(2, nrow(iris), replace = TRUE, prob = c(0.7, 0.3))
+train_data <- iris[indices == 1, ]
+test_data <- iris[indices == 2, ]
+
+# Build a Random Forest model
+rf_model <- randomForest(Species ~ ., data = train_data, ntree = 100)
+
+# Make predictions on the test set
+predictions <- predict(rf_model, test_data)
+
+# Display the confusion matrix
+table(predictions, test_data$Species)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Decision tree—-----------------------------------------------------
+install.packages('rpart')
+install.packages('rpart-plot')
+data('iris')
+tree_struc<-rpart(Species ~.,data = iris,method = "class")
+ 
+rpart.plot(tree_struc,box.palette="auto",shadow.col="gray",nn=TRUE)
+
+#----------- Apriori --------- MBA—----------------------------------------------
+
+# Install and load the required package
+install.packages("arules")
+library(arules)
+
+# Read the CSV file
+file_path <- "C:/Users/AnkushCp/Downloads/Mall_Customers.csv"
+install.packages("arules")
+library(arules)
+
+# Convert the Iris dataset into transactions
+transactions <- as(iris[, -5], "transactions")
+
+# Explore the transaction dataset
+summary(transactions)
+
+# Perform Apriori algorithm to mine association rules
+rules <- apriori(transactions, parameter = list(support = 0.2, confidence = 0.7))
+
+# Display the mined association rules
+inspect(rules)
+
+
+
+
+
+
+KNN
+
+data(iris)
+str(iris)
+summary(iris)
+set.seed(1234)
+head(iris)
+random <- runif(150)
+iris_random <- iris[order(random),]
+head(iris_random)
+
+
+normal <- function(x) (
+  return( ((x - min(x)) /(max(x)-min(x))) )
+)
+normal(1:5)
+iris_new <- as.data.frame(lapply(iris_random[,-5], normal))
+summary(iris_new)
+
