@@ -1,0 +1,888 @@
+Slips for big data:
+1. To draw and explain Hadoop Architecture and Ecosystem with the help of a case study using
+Word Count example. To define and install Hadoop.
+Ans : 
+
+Case Study: Word Count Example:
+Let's take a simple example of counting the occurrences of each word in a large set of documents using the Word Count example.
+Input Data:
+A collection of text documents stored in HDFS.
+Map Phase:
+The Map function processes each document and emits key-value pairs, where the key is a word and the value is 1 (indicating one occurrence).
+Shuffle and Sort:
+The output of the Map phase is shuffled and sorted based on the keys, ensuring that all occurrences of the same word are grouped together.
+Reduce Phase:
+The Reduce function takes each unique word and the list of corresponding values (1s) and sums them up, giving the total count for each word.
+Output:
+The final output is a list of words and their respective counts.
+To run a basic Word Count MapReduce program using Hadoop, follow these steps. This assumes you have Hadoop installed and configured on your system:
+
+
+1. **Write WordCountMapper.java:**
+   ```java
+   import java.io.IOException;
+   import java.util.StringTokenizer;
+   import org.apache.hadoop.io.IntWritable;
+   import org.apache.hadoop.io.LongWritable;
+   import org.apache.hadoop.io.Text;
+   import org.apache.hadoop.mapreduce.Mapper;
+
+
+   public class WordCountMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
+
+
+       private final static IntWritable one = new IntWritable(1);
+       private Text word = new Text();
+
+
+       public void map(LongWritable key, Text value, Context context)
+               throws IOException, InterruptedException {
+
+
+           StringTokenizer tokenizer = new StringTokenizer(value.toString());
+           while (tokenizer.hasMoreTokens()) {
+               word.set(tokenizer.nextToken());
+               context.write(word, one);
+           }
+       }
+   }
+   ```
+
+
+2. **Write WordCountReducer.java:**
+   ```java
+   import java.io.IOException;
+   import org.apache.hadoop.io.IntWritable;
+   import org.apache.hadoop.io.Text;
+   import org.apache.hadoop.mapreduce.Reducer;
+
+
+   public class WordCountReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
+
+
+       private IntWritable result = new IntWritable();
+
+
+       public void reduce(Text key, Iterable<IntWritable> values, Context context)
+               throws IOException, InterruptedException {
+
+
+           int sum = 0;
+           for (IntWritable value : values) {
+               sum += value.get();
+           }
+           result.set(sum);
+           context.write(key, result);
+       }
+   }
+   ```
+
+
+3. **Write WordCountDriver.java:**
+   ```java
+   import org.apache.hadoop.conf.Configuration;
+   import org.apache.hadoop.fs.Path;
+   import org.apache.hadoop.io.IntWritable;
+   import org.apache.hadoop.io.Text;
+   import org.apache.hadoop.mapreduce.Job;
+   import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+   import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+
+
+   public class WordCountDriver {
+
+
+       public static void main(String[] args) throws Exception {
+
+
+           Configuration conf = new Configuration();
+           Job job = Job.getInstance(conf, "word count");
+
+
+           job.setJarByClass(WordCountDriver.class);
+           job.setMapperClass(WordCountMapper.class);
+           job.setCombinerClass(WordCountReducer.class);
+           job.setReducerClass(WordCountReducer.class);
+
+
+           job.setOutputKeyClass(Text.class);
+           job.setOutputValueClass(IntWritable.class);
+
+
+           FileInputFormat.addInputPath(job, new Path(args[0]));
+           FileOutputFormat.setOutputPath(job, new Path(args[1]));
+
+
+           System.exit(job.waitForCompletion(true) ? 0 : 1);
+       }
+   }
+   ```
+
+
+4. **Compile your code:**
+   ```bash
+   javac WordCountMapper.java WordCountReducer.java WordCountDriver.java
+   ```
+
+
+5. **Create a JAR file:**
+   ```bash
+   jar cfm WordCount.jar manifest.txt WordCountMapper.class WordCountReducer.class WordCountDriver.class
+   ```
+
+
+   Ensure that `manifest.txt` contains `Main-Class: WordCountDriver`.
+
+
+6. **Create input directory in HDFS:**
+   ```bash
+   hadoop fs -mkdir input
+   ```
+
+
+7. **Upload input data to HDFS:**
+   ```bash
+   hadoop fs -put input.txt input
+   ```
+
+
+   Replace `input.txt` with your input data.
+
+
+8. **Run the WordCount program:**
+   ```bash
+   hadoop jar WordCount.jar input output
+   ```
+
+
+   Replace `input` and `output` with your specific input and output directories.
+
+
+9. **View the output:**
+   ```bash
+   hadoop fs -cat output/part-r-00000
+   ```
+
+
+   This command displays the output of your Word Count job.
+
+
+These steps assume that you have Hadoop configured on your system and that you've set up the required input data. Adjust the paths and filenames as needed.
+
+
+
+2. To implement the following file management tasks in Hadoop System (HDFS): Adding files
+and directories, Retrieving files, Deleting files
+Ans: Certainly! To implement file management tasks in Hadoop Distributed File System (HDFS) for adding files and directories, retrieving files, and deleting files, you can use the following Hadoop commands:
+
+### 1. Adding Files and Directories:
+
+#### Add a File to HDFS:
+```bash
+hadoop fs -copyFromLocal local-file-path hdfs-path
+```
+
+Replace `local-file-path` with the path of the file on your local file system, and `hdfs-path` with the destination path in HDFS.
+
+#### Add a Directory to HDFS:
+```bash
+hadoop fs -copyFromLocal local-directory-path hdfs-path
+```
+
+Replace `local-directory-path` with the path of the local directory, and `hdfs-path` with the destination path in HDFS.
+
+### 2. Retrieving Files:
+
+#### Retrieve a File from HDFS:
+```bash
+hadoop fs -copyToLocal hdfs-path local-file-path
+```
+
+Replace `hdfs-path` with the path of the file in HDFS, and `local-file-path` with the destination path on your local file system.
+
+### 3. Deleting Files:
+
+#### Delete a File from HDFS:
+```bash
+hadoop fs -rm hdfs-file-path
+```
+
+Replace `hdfs-file-path` with the path of the file in HDFS that you want to delete.
+
+#### Delete a Directory from HDFS:
+```bash
+hadoop fs -rm -r hdfs-directory-path
+```
+
+Replace `hdfs-directory-path` with the path of the directory in HDFS that you want to delete.
+
+### Examples:
+
+#### Example 1 - Add a File to HDFS:
+```bash
+hadoop fs -copyFromLocal /path/to/local/file.txt /user/hadoop/hdfs-directory/
+```
+
+#### Example 2 - Retrieve a File from HDFS:
+```bash
+hadoop fs -copyToLocal /user/hadoop/hdfs-directory/file.txt /path/to/local/
+```
+
+#### Example 3 - Delete a File from HDFS:
+```bash
+hadoop fs -rm /user/hadoop/hdfs-directory/file.txt
+```
+
+#### Example 4 - Delete a Directory from HDFS:
+```bash
+hadoop fs -rm -r /user/hadoop/hdfs-directory/
+```
+
+Make sure to replace the paths and filenames with your actual paths and filenames.
+
+3. To run a basic Word Count MapReduce program to understand MapReduce Paradigm: To
+
+count words in a given file, to view the output file, and To calculate execution time.
+Ans
+Running a basic Word Count MapReduce program involves several steps. I'll provide an outline of the steps using Hadoop and MapReduce paradigm. This example assumes you have Hadoop installed and configured on your system.
+
+### Step 1: Write the Word Count MapReduce Program
+
+Create a file named `WordCountMapper.java` with the following content:
+
+```java
+import java.io.IOException;
+import java.util.StringTokenizer;
+
+import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Mapper;
+
+public class WordCountMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
+    private final static IntWritable one = new IntWritable(1);
+    private Text word = new Text();
+
+    public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+        StringTokenizer tokenizer = new StringTokenizer(value.toString());
+        while (tokenizer.hasMoreTokens()) {
+            word.set(tokenizer.nextToken());
+            context.write(word, one);
+        }
+    }
+}
+```
+
+Create another file named `WordCountReducer.java` with the following content:
+
+```java
+import java.io.IOException;
+
+import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Reducer;
+
+public class WordCountReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
+    private IntWritable result = new IntWritable();
+
+    public void reduce(Text key, Iterable<IntWritable> values, Context context)
+            throws IOException, InterruptedException {
+        int sum = 0;
+        for (IntWritable value : values) {
+            sum += value.get();
+        }
+        result.set(sum);
+        context.write(key, result);
+    }
+}
+```
+
+### Step 2: Compile the Java Code
+
+Assuming you have the Hadoop environment set up, compile the Java code:
+
+```bash
+javac -classpath $HADOOP_HOME/share/hadoop/common/hadoop-common-<version>.jar:$HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-client-core-<version>.jar -d WordCountClasses WordCountMapper.java WordCountReducer.java
+```
+
+### Step 3: Create a JAR File
+
+```bash
+jar -cvf WordCount.jar -C WordCountClasses/ .
+```
+
+### Step 4: Prepare Input Data
+
+Assuming you have a text file named `input.txt`:
+
+```bash
+hadoop fs -mkdir /input
+hadoop fs -put input.txt /input
+```
+
+### Step 5: Run the Word Count MapReduce Job
+
+```bash
+hadoop jar WordCount.jar WordCount /input /output
+```
+
+### Step 6: View the Output
+
+```bash
+hadoop fs -cat /output/part-r-00000
+```
+
+### Step 7: Calculate Execution Time
+
+The execution time is typically logged in the Hadoop Job Tracker interface or the console output. Check for the time metrics after running the job.
+
+Note: Adjust file paths and versions according to your Hadoop setup.
+
+
+
+
+4. Implement basic functions and commands in R Programming.
+Ans: # Addition
+result_add <- 5 + 3
+cat("Addition Result:", result_add, "\n")
+
+# Subtraction
+result_sub <- 10 - 4
+cat("Subtraction Result:", result_sub, "\n")
+
+# Multiplication
+result_mul <- 6 * 7
+cat("Multiplication Result:", result_mul, "\n")
+
+# Division
+result_div <- 15 / 3
+cat("Division Result:", result_div, "\n")
+
+### Basic Arithmetic Operations:
+```R
+# Addition
+sum <- 5 + 3
+
+# Subtraction
+difference <- 7 - 2
+
+# Multiplication
+product <- 4 * 6
+
+# Division
+quotient <- 10 / 2
+```
+
+### Variables:
+```R
+# Assigning values to variables
+x <- 10
+y <- 5
+
+# Using variables in operations
+result <- x + y
+```
+
+### Data Types:
+```R
+# Numeric
+num_var <- 15
+
+# Character
+char_var <- "Hello, World!"
+
+# Logical (Boolean)
+bool_var <- TRUE
+
+# Vector (1-dimensional array)
+vector_var <- c(1, 2, 3, 4, 5)
+```
+
+### Functions:
+```R
+# Defining a function
+square <- function(x) {
+  return(x * x)
+}
+
+# Calling the function
+result <- square(4)
+```
+
+### Data Structures:
+```R
+# Vector
+vector_data <- c(3, 6, 9, 12)
+
+# Matrix
+matrix_data <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2, ncol = 3)
+
+# Data Frame
+data_frame <- data.frame(
+  Name = c("Alice", "Bob", "Charlie"),
+  Age = c(25, 30, 22),
+  Grade = c("A", "B", "C")
+)
+```
+
+### Control Structures:
+```R
+# if-else statement
+age <- 18
+if (age >= 18) {
+  print("You are an adult.")
+} else {
+  print("You are a minor.")
+}
+
+# for loop
+for (i in 1:5) {
+  print(i)
+}
+
+# while loop
+counter <- 1
+while (counter <= 5) {
+  print(counter)
+  counter <- counter + 1
+}
+```
+
+### Data Manipulation (using packages like dplyr):
+```R
+# Installing and loading the package
+install.packages("dplyr")
+library(dplyr)
+
+# Example data
+data <- data.frame(
+  Name = c("Alice", "Bob", "Charlie"),
+  Age = c(25, 30, 22),
+  Grade = c("A", "B", "C")
+)
+
+# Filtering data
+filtered_data <- data %>% filter(Age > 22)
+
+# Selecting columns
+selected_columns <- data %>% select(Name, Grade)
+
+# Adding a new column
+data_with_new_column <- data %>% mutate(NewColumn = Age * 2)
+
+
+5. To build Word Cloud, a text mining method using R for easy to understand and visualization
+than a table data.
+Ansinstall.packages("tm")
+install.packages("wordcloud")
+
+library(tm)
+library(wordcloud)
+# Read your text data, replace "your_text_file.txt" with the actual file path
+text <- tolower(readLines("file.txt", warn = FALSE))
+
+# Create a Corpus
+corpus <- Corpus(VectorSource(text))
+# Preprocess the text data
+corpus <- tm_map(corpus, content_transformer(tolower))
+corpus <- tm_map(corpus, removePunctuation)
+corpus <- tm_map(corpus, removeNumbers)
+corpus <- tm_map(corpus, removeWords, stopwords("english"))
+corpus <- tm_map(corpus, stripWhitespace)
+dtm <- DocumentTermMatrix(corpus)
+
+word_freq <- colSums(as.matrix(dtm))
+wordcloud(names(word_freq), word_freq, scale=c(3,0.5), max.words=100, random.order=FALSE)
+
+
+
+6. Write a program using R programming for Fibonacci series.
+Ans ;   
+# Function to generate Fibonacci series up to n terms
+fibonacci <- function(n) {
+  fib_series <- numeric(n)
+  
+  if (n >= 1) {
+    fib_series[1] <- 0
+  }
+  if (n >= 2) {
+    fib_series[2] <- 1
+  }
+  
+  for (i in 3:n) {
+    fib_series[i] <- fib_series[i - 1] + fib_series[i - 2]
+  }
+  
+  return(fib_series)
+}
+
+# Number of terms in the Fibonacci series
+n <- 10
+
+# Generate and print the Fibonacci series
+fib_series <- fibonacci(n)
+cat("Fibonacci Series (first", n, "terms):", fib_series, "\n")
+
+
+7. Write a program using R programming to find Armstrong number.
+Ans: 
+# Function to check if a number is an Armstrong number
+is_ArmStrong<-function(n){
+  arm=0
+  rev=0
+  while (n>0)
+  {
+    rev <- n %% 10
+    arm <- arm + (rev * rev * rev)
+    n <- floor(n / 10)
+  }
+  return(arm)
+}
+
+n<-as.numeric(readline("Enter the no : "))
+
+m=n
+ret<-is_ArmStrong(n)
+if(m==ret)
+{
+  print("Given number is Armstrong no ")
+}else
+{
+  cat("Given number is NOt Armstrong no ")
+}
+
+//153 is Arm
+
+8. Write a program in R programming for prime numbers using.
+Ans:  is_prime <- function(num) {
+  if (num < 2) {
+    return(FALSE)  # Numbers less than 2 are not prime
+  }
+  
+  for (i in 2:sqrt(num)) {
+    if (num %% i == 0) {
+      return(FALSE)  # If num is divisible by any number between 2 and sqrt(num), it's not prime
+    }
+  }
+  
+  return(TRUE)  # If no divisors are found, num is prime
+}
+
+# Example usage:
+num_to_check <- 17
+if (is_prime(num_to_check)) {
+  print(paste(num_to_check, "is a prime number."))
+} else {
+  print(paste(num_to_check, "is not a prime number."))
+}
+
+
+
+9. Write a program in R programming to implement sum of series of number
+Ans : # Function to calculate the sum of a series up to n terms
+sum_of_series <- function(n) {
+  sum_value <- sum(1:n)
+  return(sum_value)
+}
+
+# Number of terms in the series
+n <- 10
+
+# Calculate and print the sum of the series
+result <- sum_of_series(n)
+cat("Sum of the series (first", n, "terms):", result, "\n")
+
+
+10. Write a program in R programming for the implementation of vector
+Ans :  # Creating a numeric vector
+numeric_vector <- c(1, 2, 3, 4, 5)
+
+# Creating a character vector
+character_vector <- c("apple", "orange", "banana")
+
+# Creating a logical vector
+logical_vector <- c(TRUE, FALSE, TRUE, TRUE, FALSE)
+
+# Print the vectors
+cat("Numeric Vector:", numeric_vector, "\n")
+cat("Character Vector:", character_vector, "\n")
+cat("Logical Vector:", logical_vector, "\n")
+
+# Accessing elements in a vector
+cat("Third element of numeric vector:", numeric_vector[3], "\n")
+
+# Modifying elements in a vector
+numeric_vector[1] <- 10
+cat("Modified Numeric Vector:", numeric_vector, "\n")
+
+# Vector arithmetic
+result_vector <- numeric_vector * 2
+cat("Numeric Vector multiplied by 2:", result_vector, "\n")
+
+# Vector concatenation
+combined_vector <- c(numeric_vector, 6:8)
+cat("Combined Vector:", combined_vector, "\n")
+
+# 
+
+
+11. Write a program in R programming for the implementation of Data frames
+Ans; 
+# Creating a data frame
+student_data <- data.frame(
+  Name = c("John", "Jane", "Mike", "Sara"),
+  Age = c(22, 23, 21, 24),
+  Grade = c("A", "B", "A", "C")
+)
+
+# Print the data frame
+cat("Original Data Frame:\n")
+print(student_data)
+
+# Accessing elements in a data frame
+cat("\nAge of Jane:", student_data$Age[2], "\n")
+
+# Modifying elements in a data frame
+student_data$Grade[4] <- "B"
+cat("\nModified Data Frame:\n")
+print(student_data)
+
+# Adding a new column to the data frame
+student_data$Gender <- c("Male", "Female", "Male", "Female")
+cat("\nData Frame with New Column:\n")
+print(student_data)
+
+# Subsetting data frame
+subset_data <- student_data[student_data$Age > 22, ]
+cat("\nSubset of Data Frame (Age > 22):\n")
+print(subset_data)
+
+
+12. Write a program in R programming for the implementation of Matrices
+Ans: # Creating a matrix
+matrix_data <- matrix(1:12, nrow = 3, ncol = 4, byrow = TRUE)
+
+# Print the matrix
+cat("Original Matrix:\n")
+print(matrix_data)
+
+# Accessing elements in a matrix
+cat("\nElement at row 2, column 3:", matrix_data[2, 3], "\n")
+
+# Modifying elements in a matrix
+matrix_data[3, 2] <- 99
+cat("\nModified Matrix:\n")
+print(matrix_data)
+
+# Matrix arithmetic
+result_matrix <- matrix_data * 2
+cat("\nMatrix multiplied by 2:\n")
+print(result_matrix)
+
+# Matrix transpose
+transposed_matrix <- t(matrix_data)
+cat("\nTransposed Matrix:\n")
+print(transposed_matrix)
+
+# Row and column sums
+row_sums <- rowSums(matrix_data)
+col_sums <- colSums(matrix_data)
+cat("\nRow Sums:", row_sums, "\n")
+cat("Column Sums:", col_sums, "\n")
+
+
+
+13. Write a program in R programming for the implementation of list
+Ans :
+# Creating a list
+my_list <- list(
+  Name = "John",
+  Age = 25,
+  Grades = c(90, 85, 92),
+  Passed = TRUE
+)
+
+# Print the list
+cat("Original List:\n")
+print(my_list)
+
+# Accessing elements in a list
+cat("\nName:", my_list$Name, "\n")
+cat("Second Grade:", my_list$Grades[2], "\n")
+
+# Modifying elements in a list
+my_list$Age <- 26
+cat("\nModified List:\n")
+print(my_list)
+
+# Adding a new element to the list
+my_list$City <- "New York"
+cat("\nList with New Element:\n")
+print(my_list)
+
+# Removing an element from the list
+my_list$Passed <- NULL
+cat("\nList with 'Passed' Removed:\n")
+print(my_list)
+
+
+14. Perform Installation of Hadoop software in windows / Ubuntu
+
+Ans : 
+Installing Hadoop on Windows or Ubuntu involves several steps. Please note that Hadoop is primarily designed for Linux-based systems, and running it on Windows often involves additional configurations or the use of virtualization tools. Here, I'll provide brief instructions for both Windows and Ubuntu:
+Installing Hadoop on Windows:
+Java Installation:
+Hadoop requires Java. Download and install the latest version of Java from the official Oracle website.
+Hadoop Installation:
+Download the Hadoop distribution from the official Apache Hadoop releases page.
+Choose a stable release and download the binary distribution.
+Extract the downloaded archive to a directory of your choice (e.g., C:\hadoop).
+Hadoop Configuration:
+Configure the Hadoop environment by editing the hadoop-env.cmd file in the etc\hadoop directory.
+Set the JAVA_HOME variable to the path where Java is installed.
+Start Hadoop Services:
+Open a command prompt with administrator privileges.
+Navigate to the Hadoop bin directory (C:\hadoop\bin) and run the following command to start the Hadoop services:
+
+
+start-all.cmd
+
+Installing Hadoop on Ubuntu:
+Java Installation:
+Install Java using the following commands in the terminal:
+
+sudo apt update
+sudo apt install openjdk-8-jdk
+
+
+Hadoop Installation:
+Download the Hadoop distribution from the official Apache Hadoop releases page.
+Choose a stable release and download the binary distribution.
+Extract the downloaded archive to a directory of your choice (e.g., /usr/local/hadoop).
+bash
+Copy code
+sudo tar -zxvf hadoop-x.x.x.tar.gz -C /usr/local
+
+
+Hadoop Configuration:
+Edit the Hadoop configuration files in the etc/hadoop directory. Key configuration files include hadoop-env.sh, core-site.xml, and hdfs-site.xml.
+Set the Java path in hadoop-env.sh and configure Hadoop properties in the XML files.
+Create Hadoop Directories:
+Create the required Hadoop directories using the following commands:
+bash
+Copy code
+sudo mkdir -p /app/hadoop/tmp
+sudo chown $USER:$USER /app/hadoop/tmp
+
+
+Start Hadoop Services:
+Format the Hadoop Distributed File System (HDFS) using the following command:
+bash
+Copy code
+hdfs namenode -format
+
+
+Start Hadoop services:
+bash
+Copy code
+Start-dfs.sh
+—------
+Hadoop env=JAVA_HOME=C:\Progra~1\Java\jdk-21
+Httpfs-site =<configuration>
+<property>
+	<name>dfs.replication</name>
+	<value>1</value>
+</property>
+<property>
+	<name>dfs.namenode.name.dir</name>
+	<value>C:\hadoop\data\namenode</value>
+</property>
+<property>
+	<name>dfs.datanode.data.dir</name>
+	<value>C:\hadoop\data\datanode</value>
+</property>
+</configuration>
+Yarn-site =<configuration>
+
+
+<property>
+	<name>yarn.nodemanager.aux-services</name>
+	<value>mapreduce_shuffle</value>
+</property>
+<property>
+	<name>yarn.nodemanager.auxservices.mapreduce.shuffle.class</name>
+	<value>org.apache.hadoop.mapred.shuffleHandler</value>
+</property>
+</configuration>
+Core-site = <configuration>
+<property>
+	<name>fs.defaultFS</name>
+	<value>hdfs://localhost:9000</value>
+</property>
+</configuration>
+Environment variable 
+HADOOP_HOME= Bin path of hadoop
+JAVA_HOME=jdk upto 
+folder=data->namenode,datanode
+—---
+15. Find even or odd number using functions in R Programming.
+Ans : # Function to check if a number is even or odd
+check_even_odd <- function(number) {
+  if (number %% 2 == 0) {
+    return("Even")
+  } else {
+    return("Odd")
+  }
+}
+
+# Test the function with some numbers
+number1 <- 10
+number2 <- 7
+
+result1 <- check_even_odd(number1)
+result2 <- check_even_odd(number2)
+
+cat("Number", number1, "is", result1, "\n")
+cat("Number", number2, "is", result2, "\n")
+
+
+16. Perform String operations using R programming.
+Ans 
+
+# Using paste function
+string1 <- "Hello"
+string2 <- "World"
+result <- paste(string1, string2)
+cat("Concatenated String:", result, "\n")
+
+# Using paste0 for no separator
+result <- paste0(string1, string2)
+cat("Concatenated String (no separator):", result, "\n")
+
+# Extract substring
+my_string <- "DataScience"
+substring <- substr(my_string, start = 5, stop = 9)
+cat("Substring:", substring, "\n")
+
+# Get length of a string
+my_string <- "R Programming"
+length_of_string <- nchar(my_string)
+cat("Length of String:", length_of_string, "\n")
+
+# Convert to uppercase
+uppercase_string <- toupper(my_string)
+cat("Uppercase String:", uppercase_string, "\n")
+
+# Convert to lowercase
+lowercase_string <- tolower(my_string)
+cat("Lowercase String:", lowercase_string, "\n")
+
+# Split a string into a vector
+my_string <- "apple,orange,banana"
+split_vector <- strsplit(my_string, ",")[[1]]
+cat("Split String Vector:", split_vector, "\n")
+
+
+
+
+
