@@ -494,7 +494,15 @@ dtm <- DocumentTermMatrix(corpus)
 word_freq <- colSums(as.matrix(dtm))
 wordcloud(names(word_freq), word_freq, scale=c(3,0.5), max.words=100, random.order=FALSE)
 
+OR
 
+library(wordcloud)
+library(RColorBrewer)
+
+words<-c('hello','world','my ','name ','is','Worldcloud')
+freqs<-c(100,90,80,70,60,50)
+set.seed(3)
+wordcloud(words = words,freq = freqs,max.words = 100,color=brewer.pal(8,'Dark2'))
 
 6. Write a program using R programming for Fibonacci series.
 Ans ;   
