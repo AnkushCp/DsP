@@ -1,0 +1,586 @@
+https://docs.google.com/spreadsheets/d/1KTaG208u1d_hr1Q3rrBH8UpyRtcpUQtau-AIUnHOLL8/edit?usp=sharing
+
+1. Prepare test plan for MET BKC Official website.
+Ans :  Certainly! Below is a sample test plan for the MET BKC (college website) official website:
+
+### 1. INTRODUCTION:
+The MET BKC Official Website Test Plan outlines the testing strategy and approach for ensuring the quality and reliability of the website.
+
+### 2. SCOPE:
+
+#### ITEMS [MODULES] TO BE TESTED:
+1. Homepage
+2. Admissions
+3. Academic Programs
+4. Student Portal
+5. Faculty Directory
+6. Events Calendar
+7. Contact Us
+8. Search Functionality
+
+#### ITEMS [MODULES] NOT TO BE TESTED:
+1. External Links (to third-party websites)
+2. Social Media Widgets (unless integrated functionalities)
+3. Non-public development or staging environments
+
+### 3. APPROACH:
+- Manual testing for user interface and functionality.
+- Automation testing for repetitive and critical scenarios.
+- Cross-browser testing (Chrome, Firefox, Safari, Edge).
+- Mobile responsiveness testing.
+- Performance testing for page load times.
+- Security testing for potential vulnerabilities.
+- User experience testing.
+
+### 4. ACCEPTANCE:
+- The website should pass all test cases outlined in the test plan.
+- No critical or high-severity defects present in the final release.
+
+### 5. ITEM Pass / Fail CRITERIA:
+- Pass: All test cases executed successfully without any critical defects.
+- Fail: Any critical defect affecting the functionality or user experience.
+
+### 6. SUSPENSION & RESUMPTION CRITERIA:
+- Testing may be suspended if critical defects are found, and development needs to address them.
+- Testing will resume once the identified issues are resolved, and a new build is available.
+
+### 7. ROLES & RESPONSIBILITY:
+- Test Lead: Overall coordination and test strategy.
+- Testers: Execution of test cases and defect reporting.
+- Developers: Addressing reported defects and providing new builds.
+
+### 8. TEST DELIVERABLES:
+- Test Plan
+- Test Cases
+- Test Execution Reports
+- Defect Reports
+
+### 9. TEST ENVIRONMENT [HARDWARE & SOFTWARE]:
+- Hardware: Standard desktops/laptops for testing.
+- Software: Browsers (Chrome, Firefox, Safari, Edge), Automation tools (if applicable).
+
+### 10. STAFF & TRAINING NEED:
+- Testers will undergo training on the website functionality and testing tools if needed.
+- Regular knowledge sharing sessions for staying updated on testing practices.
+
+### 11. RISK & CONTINGENCIES:
+- Risk: Delays in development, lack of resources for testing.
+- Contingency: Adjust test schedule, allocate additional resources, and prioritize testing based on critical modules.
+
+### 12. APPROVAL:
+- The Test Lead will review and approve the test plan before execution.
+
+### 13. CONCLUSION:
+This test plan aims to ensure the MET BKC Official Website's quality, functionality, and security. It will be updated as needed throughout the testing process. The success of this plan will contribute to a reliable and user-friendly website for MET BKC.
+
+2. Prepare test plan for an identified Mobile Application (E-commerce web application).
+Ans : Certainly! Here's a sample test plan for an E-commerce mobile application:
+
+### 1. INTRODUCTION:
+The E-commerce Mobile Application Test Plan outlines the testing strategy to ensure the quality, security, and functionality of the mobile application.
+
+### 2. SCOPE:
+
+#### ITEMS [MODULES] TO BE TESTED:
+1. User Authentication
+2. Product Catalog
+3. Shopping Cart
+4. Checkout Process
+5. Payment Gateway Integration
+6. Order History
+7. User Account Management
+8. Search Functionality
+9. Push Notifications
+10. Offline Mode (if applicable)
+
+#### ITEMS [MODULES] NOT TO BE TESTED:
+1. Third-party services not directly controlled by the application (e.g., payment gateway servers).
+2. Operating system-specific functionalities (unless critical to the app's functionality).
+
+### 3. APPROACH:
+- Manual testing for UI, functionality, and user experience.
+- Automation testing for regression and repetitive scenarios.
+- Performance testing for responsiveness and load times.
+- Security testing for data protection and secure transactions.
+
+### 4. ACCEPTANCE:
+- The application should pass all test cases outlined in the test plan.
+- No high-severity or critical defects in the final release.
+
+### 5. ITEM Pass / Fail CRITERIA:
+- Pass: All test cases executed successfully without any critical defects.
+- Fail: Any critical defect affecting the core functionality or security of the application.
+
+### 6. SUSPENSION & RESUMPTION CRITERIA:
+- Testing may be suspended if critical defects are found, and development needs to address them.
+- Testing will resume once the identified issues are resolved, and a new build is available.
+
+### 7. ROLES & RESPONSIBILITY:
+- Test Lead: Overall coordination and test strategy.
+- Testers: Execution of test cases, defect reporting.
+- Developers: Addressing reported defects and providing new builds.
+
+### 8. TEST DELIVERABLES:
+- Test Plan
+- Test Cases
+- Test Execution Reports
+- Defect Reports
+
+### 9. TEST ENVIRONMENT [HARDWARE & SOFTWARE]:
+- Hardware: A mix of real devices and emulators.
+- Software: Mobile Operating Systems (iOS, Android), Browsers (if applicable), Automation tools.
+
+### 10. STAFF & TRAINING NEED:
+- Testers will undergo training on the application functionality and testing tools if needed.
+- Regular knowledge-sharing sessions for staying updated on mobile testing practices.
+
+### 11. RISK & CONTINGENCIES:
+- Risk: Changes in requirements, third-party API issues, network dependencies.
+- Contingency: Regular communication and collaboration, robust error handling, and contingency plans for critical functionalities.
+
+### 12. APPROVAL:
+- The Test Lead will review and approve the test plan before execution.
+
+### 13. CONCLUSION:
+This test plan aims to ensure the E-commerce Mobile Application meets high-quality standards, providing a secure, reliable, and user-friendly experience for customers. The plan will be updated as needed throughout the testing process. The success of this plan contributes to the successful launch of the mobile application.
+
+3. Prepare test plan for an identified Mobile Application (Food Delivery application).
+Ans: Certainly! Below is a sample test plan for a Food Delivery mobile application:
+
+### 1. INTRODUCTION:
+The Food Delivery Mobile Application Test Plan outlines the testing strategy to ensure the quality, reliability, and security of the mobile application.
+
+### 2. SCOPE:
+
+#### ITEMS [MODULES] TO BE TESTED:
+1. User Registration and Authentication
+2. Restaurant Listings and Menus
+3. Order Placement and Confirmation
+4. Payment Gateway Integration
+5. Real-time Order Tracking
+6. User Ratings and Reviews
+7. Notifications (Order updates, promotions)
+8. User Account Management
+9. GPS Location Services
+10. Customer Support (Chat, Help Center)
+
+#### ITEMS [MODULES] NOT TO BE TESTED:
+1. Third-party services not directly controlled by the application (e.g., payment gateway servers).
+2. Device-specific functionalities not critical to the app's core functionality.
+
+### 3. APPROACH:
+- Manual testing for UI, functionality, and user experience.
+- Automation testing for regression and repetitive scenarios.
+- Performance testing for responsiveness and order processing times.
+- Security testing for data protection and secure transactions.
+- Usability testing for a positive user experience.
+
+### 4. ACCEPTANCE:
+- The application should pass all test cases outlined in the test plan.
+- No high-severity or critical defects in the final release.
+
+### 5. ITEM Pass / Fail CRITERIA:
+- Pass: All test cases executed successfully without any critical defects.
+- Fail: Any critical defect affecting the core functionality, security, or user experience.
+
+### 6. SUSPENSION & RESUMPTION CRITERIA:
+- Testing may be suspended if critical defects are found, and development needs to address them.
+- Testing will resume once the identified issues are resolved, and a new build is available.
+
+### 7. ROLES & RESPONSIBILITY:
+- Test Lead: Overall coordination and test strategy.
+- Testers: Execution of test cases, defect reporting.
+- Developers: Addressing reported defects and providing new builds.
+- Product Owner: Ensuring requirements are accurately represented and addressed.
+
+### 8. TEST DELIVERABLES:
+- Test Plan
+- Test Cases
+- Test Execution Reports
+- Defect Reports
+
+### 9. TEST ENVIRONMENT [HARDWARE & SOFTWARE]:
+- Hardware: A mix of real devices representing various platforms.
+- Software: Mobile Operating Systems (iOS, Android), Browsers (if applicable), GPS simulators, Automation tools.
+
+### 10. STAFF & TRAINING NEED:
+- Testers will undergo training on the application functionality and testing tools if needed.
+- Regular knowledge-sharing sessions for staying updated on mobile testing practices.
+
+### 11. RISK & CONTINGENCIES:
+- Risk: Network issues, restaurant API downtime, inaccurate GPS data.
+- Contingency: Robust error handling, alternative routes for order processing, and regular communication with third-party service providers.
+
+### 12. APPROVAL:
+- The Test Lead will review and approve the test plan before execution.
+
+### 13. CONCLUSION:
+This test plan aims to ensure the Food Delivery Mobile Application meets high-quality standards, providing a secure, reliable, and seamless experience for users. The plan will be updated as needed throughout the testing process, contributing to the successful launch of the mobile application.
+
+4. Prepare/ Design test cases for any E commerce web application. 
+Ans :    
+Test case for Login form:
+Project Name:Amazon
+Test Case Template
+Test Case ID:AS01
+Test Designed by:Ankush
+Test Priority (Low/Medium/High):High
+Test Designed date:
+Module Name: Login Form
+Test Executed by:Ankush
+Test Title: Verify Login with valid user name and
+Password.
+
+
+Test Execution date:
+Description: To test the log in page of “Project
+name”
+
+
+
+
+Pre-conditions: User has valid username and password
+Dependencies:
+
+
+| Project Name           | Test Case Template      |
+|------------------------|-------------------------|
+| Test Case ID           | TC_AMZ_LOGIN_001        |
+| Test Designed by       | [Tester Name]           |
+| Test Priority          | High                    |
+| Test Designed date     | [Date]                  |
+| Module Name            | Login                   |
+| Test Executed by       | [Tester Name]           |
+| Test Title            	 | Verify Amazon Login     |
+| Test Execution date    | [Date]                  |
+| Description            | To test the login page  |
+|                       	 | of Amazon website       |
+| Pre-conditions         | User has a valid Amazon |
+|                        | account                 |
+| Dependencies           | N/A     
+
+Amazon Login
+
+5.Prepare / Design test cases for any Food Delivery application
+
+6.Prepare / Design test cases for MET BKC Official website. 
+
+7.Perform automation testing for launching and closing the website after hold of few seconds using Selenium and Intellij.
+Ans: 
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Main {
+public static void main(String[] args) throws InterruptedException {
+System.setProperty("webDriver.chrome.driver","C:\\Users\\student\\Downloads\\chromedriver-win64\\chromedriver-win64
+String baseUrl = "https://demo.quru99.com/*:
+WebDriver driver = new ChromeDriver();
+driver.manage().window().maximize();
+driver.get(baseUrl);
+Thread.sleep(millis: 4000);
+driver.findElement(By.LinkText("selenium")).click();
+System.out.println("title of page is driver.getTitle());
+driver.quit();
+ 	}
+}
+
+8. Perform automation testing for launching website and searching for a module & opening it, included in the website using Selenium and Intellij.
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+public class Main3 {
+   public static void main(String[] args)
+   {
+       System.setProperty("webDriver.chrome.driver","C:\\Users\\AnkushCp\\Downloads\\New folder\\chromedriver-win64\\chromedriver.exe");
+       WebDriver driver =new ChromeDriver();
+
+
+       driver.navigate().to("https://www.javatpoint.com/");
+
+
+   driver.manage().window().maximize();
+
+
+       JavascriptExecutor js = (JavascriptExecutor)driver;
+
+
+       js.executeScript("scrollBy(0,5000)");
+       driver.findElement(By.linkText("Java")).click();
+   }
+}
+
+
+9.Perform automation testing for launching website and getting logged into the web application with valid credentials using Selenium and Intellij.
+Ans : 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+public class Main {
+   public static void main(String[] args)throws InterruptedException {
+       System.setProperty("webDriver.chrome.driver","C:\\Users\\AnkushCp\\Downloads\\New folder\\chromedriver-win64\\chromedriver.exe");
+       WebDriver driver=new ChromeDriver();
+       driver.get("https://studify-edu.info/tbs2.0/login.php");
+
+
+       driver.manage().window().maximize();
+
+
+       WebElement usern= (WebElement) driver.findElement(By.name("email"));
+       WebElement pass = (WebElement) driver.findElement(By.name("pass"));
+       WebElement but= (WebElement) driver.findElement(By.className("register"));
+
+
+
+
+       usern.sendKeys("ankupagar3588@gmail.com");
+       pass.sendKeys("123");
+       but.click();
+
+
+       Thread.sleep(10000);
+
+
+       driver.quit();
+   }
+}
+ 
+
+
+
+10.Prepare a bug tracking report in spreadsheet for Online Banking App.
+https://docs.google.com/spreadsheets/d/1KTaG208u1d_hr1Q3rrBH8UpyRtcpUQtau-AIUnHOLL8/edit?usp=sharing
+Defect Id
+BUG-001
+Title
+Login Failure
+Defect summary
+Unable to log in
+Defect Description
+Users are unable to log in to the Online Banking App using valid credentials.
+Test Case ID
+TC-001
+Product version
+v2.0.1
+Tester
+Mary Smith
+Build Version 
+Build 123
+Priority
+High
+Severity
+Critical
+Status
+Open
+Reproducable
+Yes
+Reporting
+Automated
+remark
+
+
+
+
+
+ 11.Prepare a bug tracking report in spreadsheet for Online learning Portal.
+12.Prepare a bug tracking report in spreadsheet  for any Social Media Application
+
+13.Perform white box testing – Cyclomatic complexity, data flow testing, control flow testing for the given problem statement: Write algorithm for deciding whether the entered number is prime number or not.
+Ans : 
+Problem Statement:
+Write an algorithm for deciding whether the entered number is a prime number or not.
+1. Cyclomatic Complexity:
+Cyclomatic complexity is a software metric that provides a quantitative measure of the complexity of a program. It directly measures the number of linearly independent paths through a program's source code
+### Algorithm:
+1. Start
+2. Input a number (num)
+3. Set isPrime = True
+4. If num is less than 2, set isPrime = False
+5. For i from 2 to the square root of num (inclusive):
+     a. If num % i is equal to 0, set isPrime = False and break
+6. If isPrime is True, print "The number is prime."
+   Else, print "The number is not prime."
+7. End
+
+### Analysis:
+
+#### 1. Cyclomatic Complexity:
+
+Cyclomatic complexity (\(V(G)\)) is calculated using the formula:
+
+\[ V(G) = E - N + 2P \]
+
+Where:
+- \( E \) is the number of edges in the control flow graph.
+- \( N \) is the number of nodes in the control flow graph.
+- \( P \) is the number of connected components.
+
+**Control Flow Graph (CFG):**
+- Nodes: 1, 2, 3, 4, 5, 5a, 6, 7
+- Edges: (1-2), (2-3), (3-4), (4-5), (5-5a), (5a-6), (5-6), (6-7)
+
+[ V(G) = 8 - 7 + 2(1) = 3 ]
+
+
+
+
+
+
+#### 2. Data Flow Testing:
+
+**Variables:** `num`, `isPrime`, `i`
+- **Use Definitions:**
+  - `num` is used in steps 2, 4, 5a.
+  - `isPrime` is used in steps 3, 4, 5a, 6.
+  - `i` is used in steps 5.
+
+#### 3. Control Flow Testing:
+
+**Nodes:** 1, 2, 3, 4, 5, 5a, 6, 7
+**Edges:** (1-2), (2-3), (3-4), (4-5), (5-5a), (5a-6), (5-6), (6-7)
+
+Testing should cover all the possible paths through the algorithm:
+1. 1-2-3-4-5-6-7 (num >= 2, prime)
+2. 1-2-3-4-6-7 (num < 2, not prime)
+3. 1-2-3-4-5-5a-6-7 (num >= 2, not prime)
+
+Ensure that each decision point is tested for both true and false conditions.
+
+### Note:
+
+This analysis helps in understanding the algorithm's structure and complexity, and it guides the design of test cases to ensure comprehensive coverage. The goal is to test all possible paths and conditions within the algorithm.
+
+14.Perform white box testing – Cyclomatic complexity, data flow testing, control flow testing for the given problem statement: Write algorithm for Fibonacci series 
+Ans:
+Problem Statement:
+Write an algorithm for  fibonacci series 
+1. Cyclomatic Complexity:
+Cyclomatic complexity is a software metric that provides a quantitative measure of the complexity of a program. It directly measures the number of linearly independent paths through a program's source code
+
+### Algorithm:
+
+```java
+1. Start
+2. Input the number of terms (n) for the Fibonacci series
+3. Set first term (a) to 0 and second term (b) to 1
+4. Print a (the first term)
+5. Print b (the second term)
+6. For i from 3 to n (inclusive):
+     a. Calculate the next term (c) as the sum of a and b
+     b. Print c
+     c. Set a to b
+     d. Set b to c
+7. End
+```
+
+### Analysis:
+
+#### 1. Cyclomatic Complexity:
+
+Cyclomatic complexity (\(V(G)\)) is calculated using the formula:
+
+[ V(G) = E - N + 2P ]
+
+Where:
+- \( E \) is the number of edges in the control flow graph.
+- \( N \) is the number of nodes in the control flow graph.
+- \( P \) is the number of connected components.
+
+**Control Flow Graph (CFG):**
+- Nodes: 1, 2, 3, 4, 5, 6, 7
+- Edges: (1-2), (2-3), (3-4), (4-5), (5-6), (6-7)
+
+[ V(G) = 7 - 6 + 2(1) = 3 ]
+
+#### 2. Data Flow Testing:
+
+**Variables:** `n`, `a`, `b`, `c`, `i`
+- **Use Definitions:**
+  - `n` is used in steps 2, 6.
+  - `a` is used in steps 3, 4, 6.
+  - `b` is used in steps 3, 5, 6.
+  - `c` is used in steps 6.
+  - `i` is used in steps 6.
+
+#### 3. Control Flow Testing:
+
+**Nodes:** 1, 2, 3, 4, 5, 6, 7
+**Edges:** (1-2), (2-3), (3-4), (4-5), (5-6), (6-7)
+
+Testing should cover all the possible paths through the algorithm:
+1. 1-2-3-4-5-6-7 (n < 3)
+2. 1-2-3-4-5-6-7 (n >= 3)
+
+Ensure that each decision point is tested for both true and false conditions.
+
+### Note:
+
+This analysis provides insights into the algorithm's structure and complexity, guiding the design of test cases to ensure comprehensive coverage. The goal is to test all possible paths and conditions within the algorithm.
+
+15.Perform Black box testing using manual testing method – Boundary Value Analysis & Equivalence partitioning
+Ans:
+Scenario:
+Let's consider a simple login functionality for a web application.
+Input Fields:
+Username
+Password
+Requirements:
+Usernames must be between 5 and 15 characters.
+Passwords must be between 8 and 20 characters.
+Equivalence Partitioning:
+For each input field, we can divide the input values into three partitions: valid values, values just below the valid range, and values just above the valid range.
+Username:
+Valid Values: "user123", "john_doe"
+Values Below Valid Range: "abc", "xy"
+Values Above Valid Range: "this_is_a_very_long_username", "waytoolongusername123"
+Password:
+Valid Values: "password123", "securepass"
+Values Below Valid Range: "1234567", "shortpw"
+Values Above Valid Range: "averylongsecurepassword", "waytoolongpassword123"
+Boundary Value Analysis:
+For each input field, we will test the boundaries and just beyond the boundaries.
+Username:
+Lower Boundary: "user1", "john_d"
+Upper Boundary: "123456789012345", "abcdefghijklmnop"
+Password:
+Lower Boundary: "12345678", "abcdefgh"
+Upper Boundary: "12345678901234567890", "abcdefghijklmnopqrst"
+Testing Steps:
+Test with valid username and password.
+Test with invalid username and valid password.
+Test with valid username and invalid password.
+Test with both invalid username and password.
+Test with a username just below the valid range and a valid password.
+Test with a username just above the valid range and a valid password.
+Test with a valid username and a password just below the valid range.
+Test with a valid username and a password just above the valid range.
+Test with a username just below the valid range and a password just below the valid range.
+Test with a username just above the valid range and a password just above the valid range.
+.
+
+
+16.Implement & explain Positive testing and negative testing.
+Ans : Positive Testing:
+Definition: Positive testing, also known as "happy path" testing, involves testing the system with valid inputs to ensure that it behaves as expected under normal conditions.
+Example: Login Functionality
+Consider a simple login functionality where users enter a username and password.
+Positive Test Cases:
+Enter a valid username and a valid password.
+Verify that the system allows access to the application.
+Explanation:
+In positive testing, you focus on the expected behavior of the system when provided with correct inputs. In the example above, the positive test case checks whether the login works as intended when users provide valid credentials. The expected result is successful login and access to the application.
+Negative Testing:
+Definition: Negative testing involves testing the system with invalid inputs or unexpected conditions to ensure that it handles errors appropriately and gracefully.
+Example: Login Functionality
+Continuing with the login functionality example:
+Negative Test Cases:
+Enter a valid username and an invalid password.
+Enter an invalid username and a valid password.
+Leave both the username and password fields blank.
+Enter a username that is too long.
+Enter a password that is too short.
+Enter special characters in the username or password fields.
+
